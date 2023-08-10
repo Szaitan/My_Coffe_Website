@@ -1,0 +1,15 @@
+<nav class="navbar navbar-dark bg-dark navbar-expand justify-content-between fixed-top container-fluid px-3">
+
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <a class="navbar-brand" href="{{ url_for('cover') }}">
+      <img src="{{url_for('static', filename='img/navbar_coffe_img40x40.png')}}" alt="Coffe Image">
+      <a class="navbar-brand" href="{{ url_for('cover') }}">Easy Coffe</a>
+    </a>
+
+    <ul class="navbar-nav ms-auto nav-size coffe-navbar-text">
+      <li class="nav-item">
+        <a class="nav-link text-light" aria-current="page" href="{{ url_for('cover')}}">Locals</a>
+      </li>
+    </ul>
+  </div>
+</nav>

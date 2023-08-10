@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %}London{% endblock %}
+
+{% block additional_css %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/london_page.css')}}">
+{% endblock %}
+{% include 'header.html' %}
+{% block content %}
+
+<div class="container-fluid">
+    <div class="d-flex flex-column flex-shrink-0 bg-light" style="width: 5rem;">
+        <a href="/" class="d-block p-3 link-dark text-decoration-none" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
+            <svg class="bi" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+            <span class="visually-hidden">Icon-only</span>
+        </a>
+        <form action="{{url_for('filter_london_page')}}" method="POST">
+            <h2 class="text-center filter">Filters</h2>
+            <label>
+                <input type="checkbox" class="btn-check" id="socket-button" name="Sockets" value="1">
+                <span class="btn btn-dark text-center sidebar_buttons">Sockets</span>
+            </label>
+            <label>
+                <input type="checkbox" class="btn-check" id="toilet-button" name="Toilet" value="1">
+                <span class="btn btn-dark text-center sidebar_buttons">Toilet</span>
+            </label>
+            <label>
+                <input type="checkbox" class="btn-check" id="wifi-button" name="Wi-Fi"  value="1">
+                <span class="btn btn-dark text-center sidebar_buttons">Wi-Fi</span>
+            </label>
+            <label>
+                <input type="checkbox" class="btn-check" id="calls-button" name="Calls" value="1">
+                <span class="btn btn-dark text-center sidebar_buttons">Calls</span>
+            </label>
+            <!-- Add more buttons here -->
+            <button class="btn btn-dark text-center sidebar_buttons bg-primary" type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div class="px-3">
+        <h1 class="title-area">LONDON</h1>
+        <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqui.</h3>
+        <hr>
+        <h2>Number of places: {{ num }}</h2>
+        <div>
+            <table>
+                {% for coffee in coffee_shops %}
+                <tr>
+                    <td class="py-2">
+                        <img class="small-img-window" src="{{ coffee.img_url }}" alt="testimg">
+                    </td>
+                    <td class="py-2">
+                        <div class="coffeloc-description px-3">
+                            <h5><a href="">{{coffee.name}}</a></h5>
+                            <p>Coffe Price: {{coffee.coffee_price}}</p>
+                            <p>Location: {{ coffee.location}}</p>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor%}
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<!--<script>-->
+<!--    document.addEventListener("DOMContentLoaded", function() {-->
+<!--        const checkboxes = document.querySelectorAll(".btn-check");-->
+
+<!--        checkboxes.forEach(checkbox => {-->
+<!--            checkbox.addEventListener("click", function() {-->
+<!--                console.log("Checkbox clicked!");-->
+<!--                this.value = this.checked ? "on" : "off";-->
+<!--                console.log("Checkbox value:", this.value);-->
+<!--            });-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+
+{% endblock %}
