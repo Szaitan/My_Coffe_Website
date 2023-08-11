@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for, flash, abort
+from flask import Flask, render_template, request, url_for, flash, abort, redirect
 import os
 from datetime import datetime
 from flask_bootstrap import Bootstrap
@@ -88,6 +88,12 @@ def filter_london_page():
     filltred_data = filtr_dict[list_to_use]
     num = len(filltred_data)
     return render_template("london.html", coffee_shops=filltred_data, num=num)
+
+
+@app.route('/london/<int:coffee_id>')
+def coffe_shop(coffee_id):
+    selected_coffe_shop = db.session.query(Cafe).filter_by(id=coffee_id).first()
+    return render_template('coffee_shop.html', coffee_data=selected_coffe_shop)
 
 
 if __name__ == "__main__":

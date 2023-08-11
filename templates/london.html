@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}London{% endblock %}
+{% block title %}London Coffee Shop{% endblock %}
 
 {% block additional_css %}
     <link rel="stylesheet" href="{{url_for('static', filename='css/london_page.css')}}">
@@ -9,11 +9,7 @@
 {% block content %}
 
 <div class="container-fluid">
-    <div class="d-flex flex-column flex-shrink-0 bg-light" style="width: 5rem;">
-        <a href="/" class="d-block p-3 link-dark text-decoration-none" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Icon-only">
-            <svg class="bi" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-            <span class="visually-hidden">Icon-only</span>
-        </a>
+    <div class="d-flex flex-column flex-shrink-0 bg-light sidebar">
         <form action="{{url_for('filter_london_page')}}" method="POST">
             <h2 class="text-center filter">Filters</h2>
             <label>
@@ -32,7 +28,6 @@
                 <input type="checkbox" class="btn-check" id="calls-button" name="Calls" value="1">
                 <span class="btn btn-dark text-center sidebar_buttons">Calls</span>
             </label>
-            <!-- Add more buttons here -->
             <button class="btn btn-dark text-center sidebar_buttons bg-primary" type="submit">Submit</button>
         </form>
     </div>
@@ -51,7 +46,7 @@
                     </td>
                     <td class="py-2">
                         <div class="coffeloc-description px-3">
-                            <h5><a href="">{{coffee.name}}</a></h5>
+                            <h5><a href="{{url_for('coffe_shop', coffee_id=coffee.id)}}">{{coffee.name}}</a></h5>
                             <p>Coffe Price: {{coffee.coffee_price}}</p>
                             <p>Location: {{ coffee.location}}</p>
                         </div>

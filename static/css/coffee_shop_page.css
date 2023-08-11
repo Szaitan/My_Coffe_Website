@@ -1,0 +1,30 @@
+body {
+    font-family: 'Alegreya Sans', serif;
+}
+
+h2 {
+    font-family: 'Alegreya', serif;
+    font-size: 25px;
+}
+
+h3 {
+    font-family: 'Alegreya', serif;
+    font-size: 20px;
+}
+
+p {
+    font-family: 'Alegreya', serif;
+    font-size: 18px;
+}
+
+.selected-coffe-shop-image {
+    height: 30vh; /* Set the height to the full viewport height */
+    background-size: cover; /* Make sure the background image covers the entire container */
+    background-position: center; /* Center the background image */
+}
+
+.coffee-name {
+    text-align: center; /* Center the text within the container */
+    padding: 20px; /* Add some padding to the container */
+    color: white;
+}
