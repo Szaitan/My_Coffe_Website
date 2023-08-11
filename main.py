@@ -3,9 +3,13 @@ import os
 from datetime import datetime
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
+from flask_googlemaps import GoogleMaps
+import requests
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('app_secret_key')
+app.config['GOOGLEMAPS_KEY'] = os.environ.get('google_maps_key')
+
 Bootstrap(app)
 this_year = datetime.today().year
 
@@ -13,6 +17,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cafes.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
+GoogleMaps(app)
 
 
 # Table config
@@ -93,7 +98,25 @@ def filter_london_page():
 @app.route('/london/<int:coffee_id>')
 def coffe_shop(coffee_id):
     selected_coffe_shop = db.session.query(Cafe).filter_by(id=coffee_id).first()
-    return render_template('coffee_shop.html', coffee_data=selected_coffe_shop)
+
+    coffee_shop_name = selected_coffe_shop.name  # Get the coffee shop's name
+    google_api_key = os.environ.get('google_maps_key')
+
+    # "Find Place" API endpoint to get the place_id
+    find_place_url = f'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input={coffee_shop_name}&inputtype=textquery&fields=place_id&key={google_api_key}'
+    response = requests.get(find_place_url)
+    data = response.json()
+
+    place_id = data['candidates'][0]['place_id']
+
+    # Use the obtained place_id to fetch the place's details
+    details_url = f'https://maps.googleapis.com/maps/api/place/details/json?place_id={place_id}&key={google_api_key}'
+    response = requests.get(details_url)
+    details_data = response.json()
+
+    latitude = details_data['result']['geometry']['location']['lat']
+    longitude = details_data['result']['geometry']['location']['lng']
+    return render_template('coffee_shop.html', coffee_data=selected_coffe_shop, latitude=latitude, longitude=longitude)
 
 
 if __name__ == "__main__":

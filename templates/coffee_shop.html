@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}London Coffee Shop{% endblock %}
 
+
 {% block additional_css %}
     <link rel="stylesheet" href="{{url_for('static', filename='css/coffee_shop_page.css')}}">
 {% endblock %}
@@ -16,5 +17,117 @@
     </div>
 </div>
 
+<div class="container">
+    <table class="table table-striped">
+        <tr>
+            <td class="py-2">
+                <h1>Location:</h1>
+            </td>
+            <td class="py-2">
+                <h2>{{coffee_data.location}}</h2>
+            </td>
+        </tr>
+        <tr>
+            <td class="py-2">
+                <h1>Free Power Sockets:</h1>
+            </td>
+            {% if coffee_data.has_sockets == 1:%}
+            <td class="py-2">
+                <h2>Yes</h2>
+            </td>
+            {% else:%}
+            <td class="py-2">
+                <h2>No</h2>
+            </td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td class="py-2">
+                <h1>Free Toilets:</h1>
+            </td>
+            {% if coffee_data.has_toilet == 1:%}
+            <td class="py-2">
+                <h2>Yes</h2>
+            </td>
+            {% else:%}
+            <td class="py-2">
+                <h2>No</h2>
+            </td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td class="py-2">
+                <h1>Free Wi-Fi:</h1>
+            </td>
+            {% if coffee_data.has_wifi == 1:%}
+            <td class="py-2">
+                <h2>Yes</h2>
+            </td>
+            {% else:%}
+            <td class="py-2">
+                <h2>No</h2>
+            </td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td class="py-2">
+                <h1>Can take calls inside:</h1>
+            </td>
+            {% if coffee_data.can_take_calls == 1:%}
+            <td class="py-2">
+                <h2>Yes</h2>
+            </td>
+            {% else:%}
+            <td class="py-2">
+                <h2>No</h2>
+            </td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td class="py-2">
+                <h1>Number of seats:</h1>
+            </td>
+            <td class="py-2">
+                <h2>{{coffee_data.seats}}</h2>
+            </td>
+        </tr>
+        <tr>
+            <td class="py-2">
+                <h1>Median Coffee Price:</h1>
+            </td>
+            <td class="py-2">
+                <h2>{{coffee_data.coffee_price}}</h2>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="map-background">
+    <div class="container">
+            <div id="map" class="coffee-map"></div>
+    </div>
+</div>
+
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRnADpsPb6ofkDCPJbK1s_W0FYRaTYZH8"></script>
+<script>
+    function initMap() {
+        const coffeeShopLocation = { lat: {{ latitude }}, lng: {{ longitude }} };
+
+        const map = new google.maps.Map(document.getElementById('map'), {
+            center: coffeeShopLocation,
+            zoom: 15,
+        });
+
+        new google.maps.Marker({
+            position: coffeeShopLocation,
+            map: map,
+            title: '{{ coffee_data.name }}'
+        });
+    }
+
+    // Initialize the map when the page loads
+    initMap();
+</script>
 
 {% endblock %}
