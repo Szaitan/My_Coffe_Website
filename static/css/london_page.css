@@ -49,3 +49,8 @@ p {
 .coffeloc-description {
     px: 15px;
 }
+
+.coffe-navbar-text {
+    color: white;
+    font-size: 20px;
+}

@@ -22,32 +22,20 @@ p {
     font-size: 18px;
 }
 
-.selected-coffe-shop-image {
+.add-coffe-shop-image {
     height: 30vh;
     background-size: cover;
     background-position: center;
 }
 
-.coffee-name {
+.add-title {
     text-align: center;
     padding: 20px;
     color: white;
-}
-
-.coffee-map {
-    height: 400px;
-}
-
-.first-column {
-width: 40vh;
-text-align: center;
-}
-
-.map-background {
-background-color: lightgrey;
 }
 
 .coffe-navbar-text {
     color: white;
     font-size: 20px;
 }
+

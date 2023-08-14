@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request, url_for, flash, abort, redirect
+from flask import Flask, render_template, request, url_for, flash, redirect
 import os
 from datetime import datetime
 from flask_bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 from flask_googlemaps import GoogleMaps
+from forms import CreateAddForm
 import requests
 
 app = Flask(__name__)
@@ -119,5 +120,21 @@ def coffe_shop(coffee_id):
     return render_template('coffee_shop.html', coffee_data=selected_coffe_shop, latitude=latitude, longitude=longitude)
 
 
+@app.route("/london/add-shop", methods=["POST", "GET"])
+def add_coffe_shop():
+    form = CreateAddForm()
+    if form.validate_on_submit():
+        to_add_new_coffe_shop = Cafe(name=form.name.data, map_url=form.map_url.data, img_url=form.img_url.data,
+                                     location=form.location.data, has_sockets=form.has_sockets.data,
+                                     has_toilet=form.has_toilet.data, has_wifi=form.has_wifi.data,
+                                     can_take_calls=form.can_take_calls.data, seats=form.seats.data,
+                                     coffee_price=f"£{form.coffee_price.data}")
+        db.session.add(to_add_new_coffe_shop)
+        db.session.commit()
+        flash("Coffe Shop Added Successfully")
+        return redirect(url_for('add_coffe_shop'))
+    return render_template('add_coffe_shop.html', form=form)
+
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000)

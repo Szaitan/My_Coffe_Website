@@ -21,7 +21,7 @@
     <table class="table table-striped">
         <tr>
             <td class="py-2">
-                <h1>Location:</h1>
+                <h2>Location:</h2>
             </td>
             <td class="py-2">
                 <h2>{{coffee_data.location}}</h2>
@@ -29,7 +29,7 @@
         </tr>
         <tr>
             <td class="py-2">
-                <h1>Free Power Sockets:</h1>
+                <h2>Free Power Sockets:</h2>
             </td>
             {% if coffee_data.has_sockets == 1:%}
             <td class="py-2">
@@ -43,7 +43,7 @@
         </tr>
         <tr>
             <td class="py-2">
-                <h1>Free Toilets:</h1>
+                <h2>Free Toilets:</h2>
             </td>
             {% if coffee_data.has_toilet == 1:%}
             <td class="py-2">
@@ -57,7 +57,7 @@
         </tr>
         <tr>
             <td class="py-2">
-                <h1>Free Wi-Fi:</h1>
+                <h2>Free Wi-Fi:</h2>
             </td>
             {% if coffee_data.has_wifi == 1:%}
             <td class="py-2">
@@ -71,7 +71,7 @@
         </tr>
         <tr>
             <td class="py-2">
-                <h1>Can take calls inside:</h1>
+                <h2>Can take calls inside:</h2>
             </td>
             {% if coffee_data.can_take_calls == 1:%}
             <td class="py-2">
@@ -85,7 +85,7 @@
         </tr>
         <tr>
             <td class="py-2">
-                <h1>Number of seats:</h1>
+                <h2>Number of seats:</h2>
             </td>
             <td class="py-2">
                 <h2>{{coffee_data.seats}}</h2>
@@ -93,7 +93,7 @@
         </tr>
         <tr>
             <td class="py-2">
-                <h1>Median Coffee Price:</h1>
+                <h2>Median Coffee Price:</h2>
             </td>
             <td class="py-2">
                 <h2>{{coffee_data.coffee_price}}</h2>
